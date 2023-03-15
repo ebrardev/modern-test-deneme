@@ -1,4 +1,4 @@
-import { waitFor,render, screen } from '@testing-library/react';
+import { waitFor,render,waitForElementToBeRemoved, screen } from '@testing-library/react';
 import App from './App';
 import { useState,useEffect } from 'react';
 
@@ -23,7 +23,5 @@ test("should render the element correctly", async () =>{
 
   }
   )
-  await waitFor(() => {
-    expect(screen.queryByText('Modern Testing')).not.toBeInTheDocument()
-  })
+  await waitForElementToBeRemoved(() => { screen.queryByText("Modern Testing") })
 })
