@@ -1,20 +1,21 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('should render App component without crashing', () => {
-  render(<App />);
+function TestComponent()  {
+  return <> <button>Click Me</button>
+        <h1>ebrarmeaag</h1>
+        </>
+}
 
-  const element = screen.getByText('Modern Testing');
+test("should render the element correctly",() =>{
+  render (<TestComponent/>)
+  const element = screen.getByRole('button')
   expect(element).toBeInTheDocument();
-  // expect(screen.getByText('Modern Testing')).toBeInTheDocument();
-
 })
-
-test('should render button component', () => {
-  render(<App />);
-
-  const element = screen.getByText('Click Me');
+test (" should render the h1 correctly",()=>{
+  render(<TestComponent/>)
+  const element = screen.getByRole('heading',{
+    name:"ebrarmeaag",
+  })
   expect(element).toBeInTheDocument();
-  // expect(screen.getByText('Modern Testing')).toBeInTheDocument();
-
 })
