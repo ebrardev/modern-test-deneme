@@ -4,12 +4,12 @@ import App from './App';
 function TestComponent()  {
   return <> 
 
-  <input placeholder='ula ekrem' type="text" id="user-name" />
+Modern testing
         </>
 }
 
 test("should render the element correctly",() =>{
   render (<TestComponent/>)
-  const element = screen.getByPlaceholderText('ula ekrem')
+  const element = screen.getByText('Modern testing')
   expect(element).toBeInTheDocument();
 })
