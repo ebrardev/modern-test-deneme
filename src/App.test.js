@@ -4,12 +4,12 @@ import App from './App';
 function TestComponent()  {
   return <> 
 
- <input type="text" value="okocha" placeholder="Enter your name" />
+ <input type="text" value="okocha" alt='deneme' placeholder="Enter your name" />
         </>
 }
 
 test("should render the element correctly",() =>{
   render (<TestComponent/>)
-  const element = screen.getAllByDisplayValue('okocha')
+  const element = screen.getByAltText('deneme')
   expect(element).toBeInTheDocument();
 })
