@@ -4,12 +4,12 @@ import App from './App';
 function TestComponent()  {
   return <> 
 
-Modern testing
+ <input type="text" value="okocha" placeholder="Enter your name" />
         </>
 }
 
 test("should render the element correctly",() =>{
   render (<TestComponent/>)
-  const element = screen.getByText('Modern testing')
+  const element = screen.getAllByDisplayValue('okocha')
   expect(element).toBeInTheDocument();
 })
