@@ -3,13 +3,14 @@ import App from './App';
 
 function TestComponent()  {
   return <> 
-
-  <p data-testid="ilkkan">Modern Testing</p>
+ Modern test
         </>
 }
 
 test("should render the element correctly",() =>{
   render (<TestComponent/>)
-  const element = screen.getByTestId('ilkkan')
+  const element = screen.getByText('modern',{
+    exact: false,
+  })
   expect(element).toBeInTheDocument();
 })
