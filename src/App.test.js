@@ -4,12 +4,12 @@ import App from './App';
 function TestComponent()  {
   return <> 
 
-<span title='yilmaz' alt='deneme'>deneme</span>
+  <p data-testid="ilkkan">Modern Testing</p>
         </>
 }
 
 test("should render the element correctly",() =>{
   render (<TestComponent/>)
-  const element = screen.getByTitle('yilmaz')
+  const element = screen.getByTestId('ilkkan')
   expect(element).toBeInTheDocument();
 })
