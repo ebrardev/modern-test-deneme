@@ -14,6 +14,9 @@ function TestComponent() {
 }
 
 test('should render the component', () => {
-  const {container} = render(<TestComponent/>);
-  const element = container.querySelector('.primary-text');
-});
+render(<TestComponent/>);
+screen.debug();
+const element = screen.getByText('tantuni kebab');
+
+expect(element).toBeInTheDocument();
+ });
