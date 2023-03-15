@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { waitFor,render, screen } from '@testing-library/react';
 import App from './App';
 import { useState,useEffect } from 'react';
 
@@ -15,8 +15,15 @@ function TestComponent()  {
         </>
 }
 
-test("should render the element correctly",  () =>{
+test("should render the element correctly", async () =>{
   render (<TestComponent/>)
-  const element =  screen.queryByText('modern')
-  expect(element).not.toBeInTheDocument();
+
+  await waitFor(() => {
+    expect(screen.getByText('Modern Testing with React')).toBeInTheDocument()
+
+  }
+  )
+  await waitFor(() => {
+    expect(screen.queryByText('Modern Testing')).not.toBeInTheDocument()
+  })
 })
