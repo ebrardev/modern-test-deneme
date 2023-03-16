@@ -1,13 +1,16 @@
-import { render,screen } from "@testing-library/react";
+import { render,renderHook,screen,act } from "@testing-library/react";
 import { useState } from "react";
 import  userEvent from "@testing-library/user-event";
 
 
+function useCustomHook() {
+  const [name, setName] = useState("John");
 
-function wrapperComponent() {
-  ({children}) => <div className="wrapper">{children}</div>
-
-}
+  const changeName = (newName) => {
+    setName(newName)
+};
+return {name,changeName}
+};
 
 function TestComponent() {
  
@@ -24,11 +27,15 @@ return (
 };
 
 
-test('should click' , async () => {
-  // const user= userEvent.setup();
-  render(<TestComponent />, {
-    wrapper: wrapperComponent,
-  });
+it("should render the component",  async() => {
+  const {result} = renderHook(useCustomHook)
 
- screen.debug();  
+ expect(result.current.name).toBe("John")
+
+  act(()=>{
+  result.current.changeName("Jane")
+ })
+
+ expect(result.current.name).toBe("Jane")
 })
+  
