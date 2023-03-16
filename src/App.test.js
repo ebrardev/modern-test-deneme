@@ -1,22 +1,31 @@
-import { waitFor,render,waitForElementToBeRemoved, screen } from '@testing-library/react';
-import App from './App';
-
-
+import { render,screen } from "@testing-library/react";
+import { useState } from "react";
+import userEvent from "@testing-library/user-event";
 function TestComponent() {
-  return ( 
-    <div>
-      <p className='primary-text'>tantuni kebab</p>
-    </div>
+  const [count, setCount] = useState(0);
+  const handleIncrement = () =>  {
+    setCount(count + 1);
+
  
+};
+
+return (
+  <div>
+    <h1>{count}</h1>
+    <button onClick={handleIncrement}>Increment</button>
+  </div>
+)
+};
+
+it('should increment the count',  async () => {
+  const user = userEvent.setup();
+  render(<TestComponent />);
+
+   await user.pointer({
+    keys: '[MouseLeft]',
+    target: screen.getByRole('button',{name:  "Increment" }),
 
 
-  );
-}
-
-test('should render the component', () => {
-render(<TestComponent/>);
-screen.debug();
-const element = screen.getByText('tantuni kebab');
-
-expect(element).toBeInTheDocument();
- });
+    })
+  expect(screen.getByRole('heading')).toHaveTextContent('1'); 
+})
