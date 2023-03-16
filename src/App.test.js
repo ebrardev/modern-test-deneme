@@ -15,12 +15,9 @@ const handleCopy = () => {
 };
 return (
   <div>
-   <select multiple>
+   <input />
 
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-</select>
+
   </div>
 )
 };
@@ -29,26 +26,8 @@ return (
 test('should select multiple options', async () => {
   const user = userEvent.setup();
   render(<TestComponent />);
-  const numbers = screen.getByRole('listbox');
 
-  await user.selectOptions(numbers,'1')
-  expect(screen.getByRole('option',{name:"1"}).selected).toBe(true);
-  expect(screen.getByRole('option',{name:"2"}).selected).toBe(true);
-  expect(screen.getByRole('option',{name:"3"}).selected).toBe(false);
-
-  await user.deselectOptions(numbers,'1')
-  expect(screen.getByRole('option',{name:"1"}).selected).toBe(false);
-
-
+ const inputElement = screen.getByRole('textbox');
+ await user.type(inputElement, 'Hello World');
+  expect(inputElement).toHaveValue('Hello World');
 })
-// it('should increment the count',  async () => {
-//   const user = userEvent.setup();
-//   render(<TestComponent />);
-//   const buttonElement = screen.getByRole('button'); 
-
-//  const headingElement = screen.getByRole('heading');
-//   await user.keyboard('[tab]');
-//   await user.keyboard('[Enter]');
-//  expect(buttonElement).toHaveFocus();
-//  expect(headingElement).toHaveTextContent('1');
-// 
