@@ -32,7 +32,12 @@ test('should select multiple options', async () => {
   const numbers = screen.getByRole('listbox');
 
   await user.selectOptions(numbers,'1')
-  expect(screen.getByRole('option',{name:"1"}).selected).toBe(true);;
+  expect(screen.getByRole('option',{name:"1"}).selected).toBe(true);
+  expect(screen.getByRole('option',{name:"2"}).selected).toBe(true);
+  expect(screen.getByRole('option',{name:"3"}).selected).toBe(false);
+
+  await user.deselectOptions(numbers,'1')
+  expect(screen.getByRole('option',{name:"1"}).selected).toBe(false);
 
 
 })
