@@ -20,12 +20,11 @@ return (
 it('should increment the count',  async () => {
   const user = userEvent.setup();
   render(<TestComponent />);
+  const buttonElement = screen.getByRole('button'); 
 
-   await user.pointer({
-    keys: '[MouseLeft]',
-    target: screen.getByRole('button',{name:  "Increment" }),
-
-
-    })
-  expect(screen.getByRole('heading')).toHaveTextContent('1'); 
+ const headingElement = screen.getByRole('heading');
+  await user.keyboard('[tab]');
+  await user.keyboard('[Enter]');
+ expect(buttonElement).toHaveFocus();
+ expect(headingElement).toHaveTextContent('1');
 })
