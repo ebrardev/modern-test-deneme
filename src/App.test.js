@@ -1,33 +1,34 @@
 import { render,screen } from "@testing-library/react";
 import { useState } from "react";
-import userEvent from "@testing-library/user-event";
+import  userEvent from "@testing-library/user-event";
+
+
+
+function wrapperComponent() {
+  ({children}) => <div className="wrapper">{children}</div>
+
+}
 
 function TestComponent() {
-  const [count, setCount] = useState(0);
-  const handleIncrement = () =>  {
-    setCount(count + 1);
-
  
-};
+ 
 
-const handleCopy = () => {
-  window.navigator.clipboard.writeText("count");
-};
+
 return (
   <div>
-   <input />
-
+  
+  <p> modern testing</p>
 
   </div>
 )
 };
 
 
-test('should select multiple options', async () => {
-  const user = userEvent.setup();
-  render(<TestComponent />);
+test('should click' , async () => {
+  // const user= userEvent.setup();
+  render(<TestComponent />, {
+    wrapper: wrapperComponent,
+  });
 
- const inputElement = screen.getByRole('textbox');
- await user.type(inputElement, 'Hello World');
-  expect(inputElement).toHaveValue('Hello World');
+ screen.debug();  
 })
