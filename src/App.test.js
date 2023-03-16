@@ -15,13 +15,27 @@ const handleCopy = () => {
 };
 return (
   <div>
-    <h1>{count}</h1>
-    <button onClick={handleCopy}>Copy</button>
-     <input type="text" value={count} onChange={handleIncrement} />
+   <select multiple>
+
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+</select>
   </div>
 )
 };
 
+
+test('should select multiple options', async () => {
+  const user = userEvent.setup();
+  render(<TestComponent />);
+  const numbers = screen.getByRole('listbox');
+
+  await user.selectOptions(numbers,'1')
+  expect(screen.getByRole('option',{name:"1"}).selected).toBe(true);;
+
+
+})
 // it('should increment the count',  async () => {
 //   const user = userEvent.setup();
 //   render(<TestComponent />);
@@ -32,19 +46,4 @@ return (
 //   await user.keyboard('[Enter]');
 //  expect(buttonElement).toHaveFocus();
 //  expect(headingElement).toHaveTextContent('1');
-// })
-
-it('should increment the count',  async () => {
-  const user = userEvent.setup();
-  render(<TestComponent />);
-
-  const inputElement = screen.getByRole('textbox');
-  await user.keyboard('[tab]');
- await user.keyboard('[Enter]');
-//  await user.keyboard('[tab]');   
-    // inputElement.focus();
- inputElement.focus();
- await user.paste();
-
- expect(inputElement).toHaveValue("count")
-})
+// 
